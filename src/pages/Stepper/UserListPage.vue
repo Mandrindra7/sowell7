@@ -16,7 +16,7 @@ import { useQuasar } from 'quasar';
 
 import SwUserCard from 'src/components/SwUserCard.vue';
 
-import { User } from 'src/components/models';
+import { User } from 'src/type/type';
 import { getUserList } from 'src/service/user';
 
 const $q = useQuasar();

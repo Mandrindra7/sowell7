@@ -1,20 +1,9 @@
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
+import { Degree, Work } from 'src/type/type';
 
-export interface Degree {
-  id: string;
-  title: string;
-  field: string;
-  year: number;
-  details: string;
-}
 
-export interface Work {
-  title: string;
-  year: number;
-  link: '';
-}
 export const useFormStore = defineStore('form', () => {
   const form = ref({
     personal_info: {
