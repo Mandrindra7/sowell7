@@ -3,9 +3,9 @@
     <td class="text-left"  width="10%">{{ label }}</td>
     <td class="text-right" >{{ value }}</td>
     <td class="text-right" width="1%">
-      <q-icon
-        :name="error ? 'error' : 'check'"
-        :color="error ? 'negative' : 'positive'"
+      <q-icon v-if="error"
+        :name="error === 'negative' ? 'error' : 'check'"
+        :color="error"
         size="2em"
       ></q-icon>
     </td>
@@ -16,7 +16,7 @@
 defineProps<{
   label: string;
   value: string | number;
-  error: boolean;
+  error: 'negative' | 'positive' | null;
 }>();
 </script>
 

@@ -18,9 +18,8 @@
               v-if="workKey !== 'id'"
               :label="workKey"
               :value="summary.data[item][workKey]"
-              error
+              :error="getValidation(workKey, summary.data[item][workKey])"
             />
-
           </template>
         </template>
         <template
@@ -40,15 +39,19 @@
                 v-if="d !== 'id'"
                 :label="d"
                 :value="summary.data[item][degree][d]"
-                error
+                :error="getValidation(d, summary.data[item][degree][d])"
               />
             </template>
           </template>
         </template>
-        <template v-else >
-          <sw-tab-item v-if="item !=='degrees'" :label="item" :value="summary.data[item]" error />
+        <template v-else>
+          <sw-tab-item
+            v-if="item !== 'degrees'"
+            :label="item"
+            :value="summary.data[item]"
+            :error="getValidation(item, summary.data[item])"
+          />
         </template>
-       
       </tbody>
     </div>
   </q-markup-table>
@@ -80,6 +83,51 @@ const getTitle = (title: string) => {
   if (title === 'professional') return 'Professional Info';
 
   return '';
+};
+
+const getValidation = (key: string, value: any) => {
+  let error: 'negative' | 'positive' | null = null;
+  switch (key) {
+    case 'firstname':
+      error = value.length ? 'positive' : 'negative';
+      break;
+    case 'lastname':
+    case 'bio':
+    case 'field':
+    case 'details':
+      error = null;
+      break;
+    case 'birthdate':
+      error = value && isValidDate(value) ? 'positive' : 'negative';
+      break;
+    case 'english':
+    case 'french':
+    case 'german':
+      error = value && value > 0 ? 'positive' : 'negative';
+      break;
+    case 'title':
+      error = value.length ? 'positive' : 'negative';
+      break;
+    case 'link':
+      error = value.length && isValidHttpUrl(value) ? 'positive' : 'negative';
+      break;
+    case 'year':
+      error = value && value >= 1923 && value < 2023 ? 'positive' : 'negative';
+      break;
+  }
+  return error;
+};
+
+const isValidDate = (date: Date) =>
+  new Date(date).toString() !== 'Invalid Date';
+
+const isValidHttpUrl = (url: URL) => {
+  try {
+    const newUrl = new URL(url);
+    return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
+  } catch (err) {
+    return false;
+  }
 };
 </script>
 
