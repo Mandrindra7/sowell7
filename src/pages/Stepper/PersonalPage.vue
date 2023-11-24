@@ -4,6 +4,7 @@
       outlined
       label="First name"
       v-model="form.personal_info.firstname"
+      :rules ="[ (val) => !!val || 'First name is required']"
     ></q-input>
     <q-input
       outlined

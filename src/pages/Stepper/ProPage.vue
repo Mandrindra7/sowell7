@@ -47,6 +47,7 @@
                   outlined
                   label="Title"
                   v-model="degree.title"
+                  :rules="[(val) => !!val || 'First name is required']"
                 ></q-input>
                 <q-btn
                   rounded

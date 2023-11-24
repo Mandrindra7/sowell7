@@ -2,14 +2,22 @@
   <q-form>
     <template v-for="work in form.published_works" :key="work.id">
       <div class="column q-gutter-y-sm">
-        <q-input outlined label="Title" v-model="work.title">
+        <q-input
+          outlined
+          label="Title"
+          v-model="work.title"
+          :rules="[(val) => !!val || 'Title is required']"
+        >
           <template v-slot:prepend>
             <q-icon name="book" />
           </template>
         </q-input>
-        <q-input outlined label="Field" v-model="work.link"  :rules="[
-           (val) => isValidHttpUrl(val) || 'Please type a valid link',
-          ]">
+        <q-input
+          outlined
+          label="Field"
+          v-model="work.link"
+          :rules="[(val) => isValidHttpUrl(val) || 'Please type a valid link']"
+        >
           <template v-slot:prepend>
             <q-icon name="link" />
           </template>
