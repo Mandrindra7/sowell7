@@ -18,3 +18,13 @@ export interface Work {
   year: number;
   link: '';
 }
+
+export interface Data {
+  title: string
+  data: Array<Table> | []
+}
+
+export interface Table {
+  label: string
+  value: string
+}
