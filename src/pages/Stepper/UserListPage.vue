@@ -35,16 +35,17 @@ const initialize = async () => {
       email: item.email,
     }));
     $q.loading.hide();
-  } catch(err: any) {
+  } catch (err: any) {
     $q.notify({
-          spinner: true,
-          message: err.message,
-          timeout: 2000,
-          color: 'red-10'
-        })
+      spinner: true,
+      message: err.message,
+      timeout: 2000,
+      color: 'red-10',
+    });
     $q.loading.hide();
   }
 };
 </script>
 
 <style scoped></style>
+src/utils/type
