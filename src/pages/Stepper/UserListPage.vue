@@ -16,7 +16,7 @@ import { useQuasar } from 'quasar';
 
 import SwUserCard from 'src/components/SwUserCard.vue';
 
-import { User } from 'src/type/type';
+import { User } from 'src/utils/type';
 import { getUserList } from 'src/service/user';
 
 const $q = useQuasar();
@@ -48,4 +48,4 @@ const initialize = async () => {
 </script>
 
 <style scoped></style>
-src/utils/type
+

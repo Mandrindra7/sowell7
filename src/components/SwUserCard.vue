@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { User } from 'src/type/type';
+import { User } from 'src/utils/type';
 defineProps<{
   user: User;
 }>();
@@ -29,4 +29,4 @@ span {
   color: #000;
 }
 </style>
-src/utils/type
+
