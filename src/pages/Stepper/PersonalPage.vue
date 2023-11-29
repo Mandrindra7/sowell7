@@ -1,11 +1,20 @@
 <template>
   <q-form class="column q-gutter-y-md">
-    <q-input outlined label="First name" v-model="form.firstname"></q-input>
-    <q-input outlined label="Last name" v-model="form.lastname"></q-input>
+    <q-input
+      outlined
+      label="First name"
+      v-model="form.personal_info.firstname"
+      :rules ="[ (val) => !!val || 'First name is required']"
+    ></q-input>
+    <q-input
+      outlined
+      label="Last name"
+      v-model="form.personal_info.lastname"
+    ></q-input>
     <q-input
       outlined
       label="Birthdate"
-      v-model="form.birthdate"
+      v-model="form.personal_info.birthdate"
       mask="date"
       :rules="['date']"
     >
@@ -16,7 +25,7 @@
               navigation-min-year-month="1923/01"
               navigation-max-year-month="2013/12"
               default-year-month="2013/01"
-              v-model="form.birthdate"
+              v-model="form.personal_info.birthdate"
             >
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="Close" color="primary" flat />
@@ -41,7 +50,7 @@
       outlined
       label="Bio"
       stack-label
-      v-model="form.bio"
+      v-model="form.personal_info.bio"
       placeholder="Write a short bio about you..."
     ></q-input>
   </q-form>
@@ -50,3 +59,4 @@
 import { useFormStore } from 'src/stores/form-store';
 const { form } = useFormStore();
 </script>
+

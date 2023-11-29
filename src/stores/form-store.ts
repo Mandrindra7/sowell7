@@ -1,26 +1,16 @@
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
+import { Degree, Work } from 'src/utils/type';
 
-export interface Degree {
-  id: string;
-  title: string;
-  field: string;
-  year: number;
-  details: string;
-}
-
-export interface Work {
-  title: string;
-  year: number;
-  link: '';
-}
 export const useFormStore = defineStore('form', () => {
   const form = ref({
-    firstname: '',
-    lastname: '',
-    birthdate: '',
-    bio: '',
+    personal_info: {
+      firstname: '',
+      lastname: '',
+      birthdate: '',
+      bio: '',
+    },
     published_works_count: 0,
     published_works: [] as Work[],
     professional: {
@@ -32,10 +22,10 @@ export const useFormStore = defineStore('form', () => {
   });
 
   const resetForm = () => {
-    form.value.firstname = '';
-    form.value.lastname = '';
-    form.value.birthdate = '';
-    form.value.bio = '';
+    form.value.personal_info.firstname = '';
+    form.value.personal_info.lastname = '';
+    form.value.personal_info.birthdate = '';
+    form.value.personal_info.bio = '';
     form.value.published_works_count = 0;
     form.value.professional.english = 0;
     form.value.professional.french = 0;

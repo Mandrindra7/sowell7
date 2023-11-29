@@ -2,12 +2,22 @@
   <q-form>
     <template v-for="work in form.published_works" :key="work.id">
       <div class="column q-gutter-y-sm">
-        <q-input outlined label="Title" v-model="work.title">
+        <q-input
+          outlined
+          label="Title"
+          v-model="work.title"
+          :rules="[(val) => !!val || 'Title is required']"
+        >
           <template v-slot:prepend>
             <q-icon name="book" />
           </template>
         </q-input>
-        <q-input outlined label="Field" v-model="work.link">
+        <q-input
+          outlined
+          label="Field"
+          v-model="work.link"
+          :rules="[(val) => isValidHttpUrl(val) || 'Please type a valid link']"
+        >
           <template v-slot:prepend>
             <q-icon name="link" />
           </template>
@@ -33,4 +43,13 @@
 <script setup lang="ts">
 import { useFormStore } from 'src/stores/form-store';
 const { form } = useFormStore();
+
+const isValidHttpUrl = (url: URL) => {
+  try {
+    const newUrl = new URL(url);
+    return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
+  } catch (err) {
+    return false;
+  }
+};
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <q-page padding>
+  <q-page padding class="container">
     <q-stepper v-model="step" ref="stepper" color="primary" animated>
       <q-step
         :name="1"
@@ -24,11 +24,21 @@
         title="Publications"
         :icon="ionBookOutline"
         :disable="form.published_works_count === 0"
+        :done="step > 3"
       >
         <publication-page></publication-page>
       </q-step>
 
-      <q-step :name="4" title="Summary" :icon="ionSaveOutline">
+      <q-step
+        :name="4"
+        title="Users"
+        :icon="ionPersonOutline"
+        :done="step > 4"
+      >
+        <user-list-page />
+      </q-step>
+
+      <q-step :name="5" title="Summary" :icon="ionSaveOutline">
         <summary-page></summary-page>
       </q-step>
 
@@ -37,7 +47,7 @@
           <q-btn
             @click="stepper.next()"
             color="primary"
-            :label="step === 4 ? 'Finish' : 'Continue'"
+            :label="step === 5 ? 'Finish' : 'Continue'"
           />
           <q-btn
             v-if="step > 1"
@@ -59,6 +69,7 @@ import {
   ProPage,
   PublicationPage,
   SummaryPage,
+  UserListPage
 } from 'src/pages/Stepper';
 import {
   ionPersonOutline,
@@ -74,3 +85,9 @@ const step = ref(1);
 import { useFormStore } from 'src/stores/form-store';
 const { form } = useFormStore();
 </script>
+<style scoped>
+.container {
+  width: 900px;
+  margin: auto;
+}
+</style>
